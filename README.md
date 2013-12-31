@@ -35,7 +35,12 @@ Setting Sub Command in Plugin.yml
 
 This will set up a Sub command we can use called /gold
 
+You also need to set a depend in the plugin.yml
+
 ```yml
+depend: [SimpleSubs]
+
+
 commands:
    gold:
      description: Main Sub Command for gold plugin
@@ -49,3 +54,15 @@ commands:
          children:
              gold.admin: true
 ```
+
+Getting a reference to SimpleSubs in your plugin
+---
+
+Provided you have the SimpleSubs in your build path, in the OnEnable section add the following.
+This will create a hook to SimpleSubs and also create an instance of the command register.
+
+```java
+Simplesubs ss = (Simplesubs) getServer().getPluginManager().getPlugin("SimpleSubs");
+registerCommand rg = ss.getCommandRegister();
+```
+
