@@ -11,17 +11,17 @@ import java.util.Map;
  * @version 0.1
  */
 public class registerCommand {
-    private Map<String,FixedSub> store = new HashMap<>();
+    private Map<String, FixedSub> store = new HashMap<>();
 
-    public void add(FixedSub sub){
+    public void add(FixedSub sub) {
         this.store.put(sub.getName(), sub);
     }
 
-    public Map<String,FixedSub> getStore(){
+    public Map<String, FixedSub> getStore() {
         return this.store;
     }
 
-    public registerCommand(){
+    public registerCommand() {
 
     }
 }

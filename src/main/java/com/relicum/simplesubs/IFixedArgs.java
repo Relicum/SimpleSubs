@@ -9,10 +9,11 @@ package com.relicum.simplesubs;
  */
 public interface IFixedArgs {
 
+
     /**
      * Sets num args.
      *
-     * @param args the args
+     * @return the num args
      */
-    void setNumArgs(int args);
+    int setNumArgs();
 }

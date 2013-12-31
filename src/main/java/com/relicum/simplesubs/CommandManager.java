@@ -60,6 +60,9 @@ public class CommandManager implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] strings) {
+        if(strings.length == 0){
+            return false;
+        }
         if (!(sender instanceof Player)) {
             sender.sendMessage(MM.getPlayerOnly());
             return true;
@@ -81,10 +84,14 @@ public class CommandManager implements CommandExecutor {
             return true;
         }
 
+        if(subCom.getNumArgs() != strings.length){
+            player.sendMessage(ChatColor.RED + "Error incorrect number of arguments command exited");
+            return true;
+        }
 
         //Check they have the perm
         if (!player.isOp() && (!player.hasPermission(subCom.getPermission()))) {
-            player.sendMessage(subCom.getNoPermMessage());
+            player.sendMessage(subCom.getNumArgsInValid());
             return true;
         }
 

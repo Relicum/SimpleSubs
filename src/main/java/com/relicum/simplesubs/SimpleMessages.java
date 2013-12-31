@@ -9,12 +9,13 @@ import org.bukkit.ChatColor;
  * @author Relicum
  * @version 0.1
  */
-public class SimpleMessages{
+public class SimpleMessages {
 
     private String playerOnly = "Command can not be run from console";
     private String unKnownCmd = ChatColor.RED + "Error: Unknown Command";
     private String internalError = ChatColor.RED + "Internal Error has occurred please let a member of staff know";
-    public SimpleMessages(){
+
+    public SimpleMessages() {
 
     }
 
@@ -27,7 +28,7 @@ public class SimpleMessages{
      *
      * @param mess the mess
      */
-    public void setPlayerOnly(String mess){
+    public void setPlayerOnly(String mess) {
         this.playerOnly = mess;
     }
 

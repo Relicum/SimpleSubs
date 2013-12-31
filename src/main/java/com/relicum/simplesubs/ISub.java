@@ -1,7 +1,7 @@
 package com.relicum.simplesubs;
 
 /**
- * AbilitiesApi
+ * SimpleSubs
  * First Created 30/12/13
  *
  * @author Relicum
@@ -10,48 +10,44 @@ package com.relicum.simplesubs;
 public interface ISub {
 
     /**
-     * Sets description.
+     * Gets command description.
      *
-     * @param description the description
+     * @return the description
      */
-    void setDescription(String description);
-
+    String getDescription();
 
     /**
-     * Sets permission.
+     * Gets command permission.
      *
-     * @param permission the permission
+     * @return the permission
      */
-    void setPermission(String permission);
-
+    String getPermission();
 
     /**
-     * Sets usage.
+     * Gets command usage.
      *
-     * @param usage the usage
+     * @return the usage
      */
-    void setUsage(String usage);
-
+    String getUsage();
 
     /**
-     * Sets label.
+     * Gets command label.
      *
-     * @param label the label
+     * @return the label
      */
-    void setLabel(String label);
-
-
-    /**
-     * Sets cmd.
-     *
-     * @param cmd the cmd
-     */
-    void setCmdString(String cmd);
+    String getLabel();
 
     /**
-     * Sets no perm message.
+     * Gets cmd string.
      *
-     * @param mess the mess
+     * @return the cmd string
      */
-    void setNoPermMessage(String mess);
+    String getCmdString();
+
+    /**
+     * Gets num args in valid.
+     *
+     * @return the num args in valid
+     */
+    String getNumArgsInValid();
 }

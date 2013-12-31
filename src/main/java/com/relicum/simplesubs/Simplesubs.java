@@ -13,7 +13,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Simplesubs extends JavaPlugin {
 
 
-
     @Override
     public void onEnable() {
 
@@ -24,13 +23,13 @@ public class Simplesubs extends JavaPlugin {
     /**
      * Get command manager.
      *
-     * @param pl the pl
-     * @param rg the rg
+     * @param pl   the pl
+     * @param rg   the rg
      * @param subM the sub m
      * @return the command manager
      */
-    public CommandManager getCommandManager(Plugin pl,registerCommand rg,SimpleMessages subM){
-        return new CommandManager(pl,rg,subM);
+    public CommandManager getCommandManager(Plugin pl, registerCommand rg, SimpleMessages subM) {
+        return new CommandManager(pl, rg, subM);
     }
 
     /**
@@ -39,7 +38,7 @@ public class Simplesubs extends JavaPlugin {
      * @param pl the pl
      * @return the debug manager
      */
-    public DebugManager getDebugManager(Plugin pl){
+    public DebugManager getDebugManager(Plugin pl) {
         return new DebugManager(pl);
     }
 
@@ -48,7 +47,7 @@ public class Simplesubs extends JavaPlugin {
      *
      * @return the register command
      */
-    public registerCommand getCommandRegister(){
+    public registerCommand getCommandRegister() {
         return new registerCommand();
     }
 
@@ -57,7 +56,7 @@ public class Simplesubs extends JavaPlugin {
      *
      * @return the simple messages
      */
-    public SimpleMessages getSimpleMessages(){
+    public SimpleMessages getSimpleMessages() {
         return new SimpleMessages();
     }
 
