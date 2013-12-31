@@ -4,21 +4,3 @@ author: [Relicum]
 version: 0.0.1-SNAPSHOT
 description: Developer tool make it easier to create Sub Commands
 prefix: SS
-
-commands:
-  simple:
-    description: Main Sub Command for AbilitiesApi
-    aliases: smpl
-    permission: simplesubs.admin
-    usage: /simple [command] [args]
-  debuger:
-    description: Used for debugging purposes will only run from console
-    aliases: sdbug
-    permission: simplesubs.debug
-    usage: sdebuger [args]
-
-permissions:
-    simplesubs.admin.*:
-        description: Gives player access to all commands
-        children:
-            simplesubs.admin: true
