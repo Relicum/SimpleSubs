@@ -1,7 +1,7 @@
 package com.relicum.simplesubs;
 
 /**
- * AbilitiesApi
+ * SimpleSubs
  * First Created 30/12/13
  *
  * @author Relicum
@@ -11,9 +11,10 @@ public interface IFixedArgs {
 
 
     /**
-     * Sets num args.
+     * Get num args.
      *
      * @return the num args
      */
-    int setNumArgs();
+    int getNumArgs();
+
 }

@@ -5,7 +5,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,7 +24,8 @@ import java.util.*;
  */
 public class CommandManager implements CommandExecutor {
 
-    public Map<String, FixedSub> clist = new HashMap<>();
+    public Map<String, AbstractBase> clist = new HashMap<>();
+
     public Plugin plugin;
     public SimpleMessages MM;
 
@@ -41,7 +41,8 @@ public class CommandManager implements CommandExecutor {
 
         clist = rg.getStore();
         MM = subMM;
-        for (Map.Entry<String, FixedSub> entry : clist.entrySet()) {
+        for (Map.Entry<String, AbstractBase> entry : clist.entrySet()) {
+
 
             registerCommand(entry.getKey(), entry.getValue());
         }
@@ -77,16 +78,25 @@ public class CommandManager implements CommandExecutor {
         t.addAll(Arrays.asList(strings));
         t.remove(0);
         strings = t.toArray(new String[t.size()]);
-        FixedSub subCom = clist.get(sub);
+        FixedSub subCom = null;
+        MultiSub subcom = null;
+        if (clist.get(sub) instanceof FixedSub) {
+            subCom = (FixedSub) clist.get(sub);
+        } else {
+
+            subcom = (MultiSub) clist.get(sub);
+        }
+
         // Check if the sub command is valid
         if (!clist.containsKey(sub)) {
             player.sendMessage(MM.getUnKnownCmd());
             return true;
         }
 
-        if(subCom.getNumArgs() != strings.length){
-            player.sendMessage(ChatColor.RED + "Error incorrect number of arguments command exited");
-            return true;
+        if (subCom != null) {
+            if(subCom.getNumArgs() != strings.length){
+                player.sendMessage(ChatColor.RED + "Error incorrect number of arguments");
+                return true;
         }
 
         //Check they have the perm
@@ -96,12 +106,34 @@ public class CommandManager implements CommandExecutor {
         }
 
         try {
-            clist.get(sub).onCommand(player, strings);
+            subCom.onCommand(player, strings);
         } catch (IOException | ClassNotFoundException e) {
             player.sendMessage(MM.getInternalError());
             e.printStackTrace();
         }
 
+        }
+
+        if (subcom != null) {
+            if (strings.length > subcom.getMaxArgs() || strings.length < subcom.getMinArgs()) {
+                player.sendMessage(ChatColor.RED + "Error incorrect number of arguments");
+                return true;
+            }
+
+            //Check they have the perm
+            if (!player.isOp() && (!player.hasPermission(subcom.getPermission()))) {
+                player.sendMessage(subcom.getNumArgsInValid());
+                return true;
+            }
+
+            try {
+                subcom.onCommand(player, strings);
+            } catch (IOException | ClassNotFoundException e) {
+                player.sendMessage(MM.getInternalError());
+                e.printStackTrace();
+            }
+
+        }
         return true;
     }
 
@@ -112,7 +144,8 @@ public class CommandManager implements CommandExecutor {
      * @param name String
      * @param sb   SubBase
      */
-    public boolean registerCommand(String name, FixedSub sb) {
+    public boolean registerCommand(String name, AbstractBase sb) {
+
 
         String[] ps = sb.getPermission().split("\\.");
         String ubPerm = ps[0] + "." + ps[1];
@@ -123,7 +156,7 @@ public class CommandManager implements CommandExecutor {
 
         Permission per = new Permission(ubPerm + "." + name);
 
-        per.setDefault(PermissionDefault.OP);
+        per.setDefault(sb.getPermissionDefault());
         per.addParent(ubPerm, true);
         per.setDescription(des);
         plugin.getServer().getPluginManager().addPermission(per);

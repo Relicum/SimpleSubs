@@ -4,21 +4,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * AbilitiesApi
+ * SimpleSubs
  * First Created 30/12/13
  *
  * @author Relicum
  * @version 0.1
  */
 public class registerCommand {
-    private Map<String, FixedSub> store = new HashMap<>();
+    private Map<String, AbstractBase> store = new HashMap<>();
+    private Map<String, MultiSub> mstore = new HashMap<>();
 
     public void add(FixedSub sub) {
         this.store.put(sub.getName(), sub);
     }
 
-    public Map<String, FixedSub> getStore() {
+    public void add(MultiSub sub) {
+        this.store.put(sub.getName(), sub);
+    }
+
+    public Map<String, AbstractBase> getStore() {
         return this.store;
+    }
+
+    public Map<String, MultiSub> getMStore() {
+        return this.mstore;
     }
 
     public registerCommand() {

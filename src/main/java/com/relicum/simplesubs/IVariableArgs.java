@@ -1,7 +1,7 @@
 package com.relicum.simplesubs;
 
 /**
- * AbilitiesApi
+ * SimpleSubs
  * First Created 30/12/13
  *
  * @author Relicum
@@ -11,16 +11,17 @@ public interface IVariableArgs {
 
 
     /**
-     * Sets min args.
+     * Gets min args.
      *
-     * @param minArgs the min args
+     * @return the min args
      */
-    void setMinArgs(int minArgs);
+    int getMinArgs();
+
 
     /**
-     * Sets max args.
+     * Gets max args.
      *
-     * @param maxArgs the max args
+     * @return the max args
      */
-    void setMaxArgs(int maxArgs);
+    int getMaxArgs();
 }
