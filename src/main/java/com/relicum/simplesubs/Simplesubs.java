@@ -20,14 +20,17 @@ public class Simplesubs extends JavaPlugin {
 
     }
 
+
     /**
-     * Get a new instance of CommandManager
+     * Get command manager.
      *
-     * @param pl the pl the plugin instance
+     * @param pl the pl
+     * @param rg the rg
+     * @param subM the sub m
      * @return the command manager
      */
-    public CommandManager getCommandManager(Plugin pl,registerCommand rg){
-        return new CommandManager(pl,rg);
+    public CommandManager getCommandManager(Plugin pl,registerCommand rg,SimpleMessages subM){
+        return new CommandManager(pl,rg,subM);
     }
 
     /**
@@ -48,6 +51,16 @@ public class Simplesubs extends JavaPlugin {
     public registerCommand getCommandRegister(){
         return new registerCommand();
     }
+
+    /**
+     * Get messages.
+     *
+     * @return the simple messages
+     */
+    public SimpleMessages getSimpleMessages(){
+        return new SimpleMessages();
+    }
+
 
     @Override
     public void onDisable() {

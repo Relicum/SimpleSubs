@@ -1,5 +1,7 @@
 package com.relicum.simplesubs;
 
+import org.bukkit.ChatColor;
+
 /**
  * AbilitiesApi
  * First Created 30/12/13
@@ -14,6 +16,7 @@ public abstract class AbstractFixedSub implements ISub {
     private String usage;
     private String label;
     private String cmdString;
+    private String noPermMessage = ChatColor.RED + "You do not have permission to run this command";
 
     /**
      * Sets description.
@@ -99,6 +102,21 @@ public abstract class AbstractFixedSub implements ISub {
     @Override
     public void setCmdString(String cmdString) {
        this.cmdString = cmdString;
+    }
+
+    /**
+     * Sets no perm message.
+     *
+     * @param mess the mess
+     */
+    @Override
+    public void setNoPermMessage(String mess) {
+        this.noPermMessage = mess;
+    }
+
+    final public String getNoPermMessage()
+    {
+        return this.noPermMessage;
     }
 
     /**

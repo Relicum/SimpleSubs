@@ -27,6 +27,7 @@ public class CommandManager implements CommandExecutor {
 
     public Map<String, FixedSub> clist = new HashMap<>();
     public Plugin plugin;
+    public SimpleMessages MM;
 
 
     public boolean setupCommands() {
@@ -35,11 +36,11 @@ public class CommandManager implements CommandExecutor {
     }
 
 
-    public CommandManager(Plugin pl, registerCommand rg) {
+    public CommandManager(Plugin pl, registerCommand rg,SimpleMessages subMM) {
         this.plugin = (JavaPlugin) pl;
 
         clist = rg.getStore();
-
+        MM = subMM;
         for (Map.Entry<String, FixedSub> entry : clist.entrySet()) {
 
             registerCommand(entry.getKey(), entry.getValue());
@@ -60,11 +61,12 @@ public class CommandManager implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] strings) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("Can only be run as a player");
+            sender.sendMessage(MM.getPlayerOnly());
             return true;
         }
 
         Player player = (Player) sender;
+
 
 
         String sub = strings[0];
@@ -72,24 +74,24 @@ public class CommandManager implements CommandExecutor {
         t.addAll(Arrays.asList(strings));
         t.remove(0);
         strings = t.toArray(new String[t.size()]);
-
+        FixedSub subCom = clist.get(sub);
         // Check if the sub command is valid
         if (!clist.containsKey(sub)) {
-            player.sendMessage(ChatColor.RED + "Error: Unknown Command");
+            player.sendMessage(MM.getUnKnownCmd());
             return true;
         }
 
-        FixedSub subCom = clist.get(sub);
+
         //Check they have the perm
         if (!player.isOp() && (!player.hasPermission(subCom.getPermission()))) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to run that command");
+            player.sendMessage(subCom.getNoPermMessage());
             return true;
         }
 
         try {
             clist.get(sub).onCommand(player, strings);
         } catch (IOException | ClassNotFoundException e) {
-            player.sendMessage(ChatColor.RED + "Internal Error has occurred please let a member of staff know");
+            player.sendMessage(MM.getInternalError());
             e.printStackTrace();
         }
 

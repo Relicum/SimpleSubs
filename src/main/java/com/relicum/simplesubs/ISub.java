@@ -48,5 +48,10 @@ public interface ISub {
      */
     void setCmdString(String cmd);
 
-
+    /**
+     * Sets no perm message.
+     *
+     * @param mess the mess
+     */
+    void setNoPermMessage(String mess);
 }
