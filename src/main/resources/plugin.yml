@@ -1,6 +1,6 @@
 name: SimpleSubs
 main: com.relicum.simplesubs.Simplesubs
 author: [Relicum]
-version: 0.0.1-SNAPSHOT
+version: 0.0.1
 description: Developer tool make it easier to create Sub Commands
 prefix: SS
