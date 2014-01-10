@@ -7,7 +7,7 @@ The plugin is a developers tool for creating Sub commands for your plugin. This 
 You can set up an unlimited under of commands and Sub commands all with their own permissions.
 
 SimpleSubs will take care of correctly registering the commands and permissions with the Bukkit API.
-It will also register the commands with Bukkits inbuilt help facilities.
+It will also register the commands with Bukkits inbuilt help facilities. As well as impliment TabComplete for the top level sub commands.
 
 SimpleSubs will also automatically take care of permissions checking, if the command is valid and has the correct
 number of arguments. Displaying the appropriate messages to the user. Leaving you to get on with programming the

@@ -8,6 +8,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.StringUtil;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -22,9 +23,10 @@ import java.util.*;
  * @author Relicum
  * @version 0.1
  */
-public class CommandManager implements CommandExecutor {
+public class CommandManager implements TabExecutor {
 
     public Map<String, AbstractBase> clist = new HashMap<>();
+    public List<String> tabs;
 
     public Plugin plugin;
     public SimpleMessages MM;
@@ -36,14 +38,14 @@ public class CommandManager implements CommandExecutor {
     }
 
 
-    public CommandManager(Plugin pl, registerCommand rg,SimpleMessages subMM) {
+    public CommandManager(Plugin pl, registerCommand rg, SimpleMessages subMM) {
         this.plugin = (JavaPlugin) pl;
-
+        tabs = new ArrayList<>(rg.getStore().size());
         clist = rg.getStore();
         MM = subMM;
         for (Map.Entry<String, AbstractBase> entry : clist.entrySet()) {
 
-
+            tabs.add(entry.getKey());
             registerCommand(entry.getKey(), entry.getValue());
         }
 
@@ -61,7 +63,7 @@ public class CommandManager implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] strings) {
-        if(strings.length == 0){
+        if (strings.length == 0) {
             return false;
         }
         if (!(sender instanceof Player)) {
@@ -70,7 +72,6 @@ public class CommandManager implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-
 
 
         String sub = strings[0];
@@ -94,23 +95,23 @@ public class CommandManager implements CommandExecutor {
         }
 
         if (subCom != null) {
-            if(subCom.getNumArgs() != strings.length){
+            if (subCom.getNumArgs() != strings.length) {
                 player.sendMessage(ChatColor.RED + "Error incorrect number of arguments");
                 return true;
-        }
+            }
 
-        //Check they have the perm
-        if (!player.isOp() && (!player.hasPermission(subCom.getPermission()))) {
-            player.sendMessage(subCom.getNumArgsInValid());
-            return true;
-        }
+            //Check they have the perm
+            if (!player.isOp() && (!player.hasPermission(subCom.getPermission()))) {
+                player.sendMessage(subCom.getNumArgsInValid());
+                return true;
+            }
 
-        try {
-            subCom.onCommand(player, strings);
-        } catch (IOException | ClassNotFoundException e) {
-            player.sendMessage(MM.getInternalError());
-            e.printStackTrace();
-        }
+            try {
+                subCom.onCommand(player, strings);
+            } catch (IOException | ClassNotFoundException e) {
+                player.sendMessage(MM.getInternalError());
+                e.printStackTrace();
+            }
 
         }
 
@@ -167,6 +168,7 @@ public class CommandManager implements CommandExecutor {
         cd.setDescription(des);
         cd.setUsage(sb.getUsage());
         cd.setExecutor(this);
+
         cd.setPermission(sb.getPermission());
 
         boolean display = false;
@@ -237,7 +239,18 @@ public class CommandManager implements CommandExecutor {
     }
 
 
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return null;
+    public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] strings) {
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            if (strings.length == 1) {
+                if (s.equalsIgnoreCase("gold")) {
+
+                    return StringUtil.copyPartialMatches(strings[0], tabs, new ArrayList<String>(tabs.size()));
+                }
+            }
+        }
+        return Arrays.asList("");
     }
+
+
 }

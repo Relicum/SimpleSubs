@@ -97,5 +97,4 @@ public abstract class AbstractBase extends ISubBase {
         return this.name;
     }
 
-
 }

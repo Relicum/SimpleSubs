@@ -16,6 +16,9 @@ public class Simplesubs extends JavaPlugin {
     @Override
     public void onEnable() {
 
+        System.out.println("*******--->         Powered By SimpleSubs         <---*******");
+        System.out.println("*******          Developer Guide Available At         *******");
+        System.out.println("*******   https://github.com/Relicum/SimpleSubs/wiki  *******");
 
     }
 
