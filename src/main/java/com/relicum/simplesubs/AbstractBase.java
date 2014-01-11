@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public abstract class AbstractBase extends ISubBase {
 
-    public String name;
+
     public PermissionDefault permissionDefault = PermissionDefault.OP;
 
     /**
@@ -73,13 +73,6 @@ public abstract class AbstractBase extends ISubBase {
 
 
     /**
-     * Set name.
-     */
-    public void setName() {
-        this.name = this.getClass().getSimpleName();
-    }
-
-    /**
      * Get permission default.
      *
      * @return the permission default
@@ -88,13 +81,5 @@ public abstract class AbstractBase extends ISubBase {
         return this.permissionDefault;
     }
 
-    /**
-     * Get name.
-     *
-     * @return the string
-     */
-    public String getName() {
-        return this.name;
-    }
 
 }

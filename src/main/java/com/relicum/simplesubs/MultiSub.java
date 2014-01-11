@@ -22,7 +22,6 @@ public abstract class MultiSub extends AbstractBase implements IVariableArgs {
         this.usage = setUsage();
         this.cmdString = setCmdString();
         this.permissionDefault = setPermissionDefault();
-        setName();
 
 
     }
@@ -60,4 +59,9 @@ public abstract class MultiSub extends AbstractBase implements IVariableArgs {
     public int getMaxArgs() {
         return this.maxArgs;
     }
+
+  /*  public String getName(){
+        return this.name;
+    }
+   */
 }

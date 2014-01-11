@@ -19,8 +19,6 @@ public abstract class FixedSub extends AbstractBase implements IFixedArgs {
         this.usage = setUsage();
         this.cmdString = setCmdString();
         this.permissionDefault = setPermissionDefault();
-        setName();
-
 
     }
 
@@ -39,5 +37,9 @@ public abstract class FixedSub extends AbstractBase implements IFixedArgs {
     @Override
     public int getNumArgs() {
         return this.numArgs;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

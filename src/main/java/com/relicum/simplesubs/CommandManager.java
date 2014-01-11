@@ -79,10 +79,14 @@ public class CommandManager implements TabExecutor {
         t.addAll(Arrays.asList(strings));
         t.remove(0);
         strings = t.toArray(new String[t.size()]);
+
         FixedSub subCom = null;
         MultiSub subcom = null;
+
         if (clist.get(sub) instanceof FixedSub) {
             subCom = (FixedSub) clist.get(sub);
+
+
         } else {
 
             subcom = (MultiSub) clist.get(sub);
@@ -243,10 +247,10 @@ public class CommandManager implements TabExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (strings.length == 1) {
-                if (s.equalsIgnoreCase("gold")) {
 
-                    return StringUtil.copyPartialMatches(strings[0], tabs, new ArrayList<String>(tabs.size()));
-                }
+
+                return StringUtil.copyPartialMatches(strings[0], tabs, new ArrayList<String>(tabs.size()));
+
             }
         }
         return Arrays.asList("");

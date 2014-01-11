@@ -9,14 +9,16 @@ import org.bukkit.ChatColor;
  * @author Relicum
  * @version 0.1
  */
-public abstract class ISubBase implements ISub {
+public class ISubBase implements ISub {
 
+    public String name = this.getClass().getSimpleName();
     public String description;
     public String permission;
     public String usage;
     public String label;
     public String cmdString;
     public String numArgsInValid = ChatColor.RED + "Error incorrect number of arguments command exited";
+
 
     /**
      * Gets command description.
@@ -76,5 +78,10 @@ public abstract class ISubBase implements ISub {
     @Override
     public String getNumArgsInValid() {
         return this.numArgsInValid;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }

@@ -50,4 +50,11 @@ public interface ISub {
      * @return the num args in valid
      */
     String getNumArgsInValid();
+
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+    String getName();
 }
