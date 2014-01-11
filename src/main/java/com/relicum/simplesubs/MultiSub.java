@@ -60,8 +60,4 @@ public abstract class MultiSub extends AbstractBase implements IVariableArgs {
         return this.maxArgs;
     }
 
-  /*  public String getName(){
-        return this.name;
-    }
-   */
 }

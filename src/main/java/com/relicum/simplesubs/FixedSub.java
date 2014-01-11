@@ -39,7 +39,5 @@ public abstract class FixedSub extends AbstractBase implements IFixedArgs {
         return this.numArgs;
     }
 
-    public String getName() {
-        return this.name;
-    }
+
 }
