@@ -5,7 +5,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * SimpleSubs
- * First Created 31/12/13
+ * Used to handel all incoming commands.
+ * <p>
+ * Registers the command and it's permission correct with Bukkit.
+ * Integrates by default Bukkit help facility. Implements automatically TabCompletion at the root level
+ * </p>
+ * <p>All incoming commands will have their permission checked automatically before being passed to your command. I default permission
+ * message is displayed or you can override this using {@link com.relicum.simplesubs.SimpleMessages}
+ * </p>
  *
  * @author Relicum
  * @version 0.1
@@ -13,6 +20,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Simplesubs extends JavaPlugin {
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onEnable() {
 
@@ -24,15 +34,15 @@ public class Simplesubs extends JavaPlugin {
 
 
     /**
-     * Get command manager.
+     * Gets {@link com.relicum.simplesubs.CommandManager} that is used to register your commands against
      *
-     * @param pl   the pl
-     * @param rg   the rg
-     * @param subM the sub m
+     * @param plugin the needs to be a instance of YOUR plugin
+     * @param registerCommand the register command
+     * @param simpleMessages the simple messages
      * @return the command manager
      */
-    public CommandManager getCommandManager(Plugin pl, registerCommand rg, SimpleMessages subM) {
-        return new CommandManager(pl, rg, subM);
+    public CommandManager getCommandManager(Plugin plugin, registerCommand registerCommand, SimpleMessages simpleMessages) {
+        return new CommandManager(plugin, registerCommand, simpleMessages);
     }
 
     /**
@@ -64,6 +74,7 @@ public class Simplesubs extends JavaPlugin {
     }
 
 
+    /** {@inheritDoc} */
     @Override
     public void onDisable() {
 

@@ -21,9 +21,9 @@ public class ISubBase implements ISub {
 
 
     /**
+     * {@inheritDoc}
+     * <p/>
      * Gets command description.
-     *
-     * @return the description
      */
     @Override
     public String getDescription() {
@@ -31,9 +31,9 @@ public class ISubBase implements ISub {
     }
 
     /**
+     * {@inheritDoc}
+     * <p/>
      * Gets command permission.
-     *
-     * @return the permission
      */
     @Override
     public String getPermission() {
@@ -41,9 +41,9 @@ public class ISubBase implements ISub {
     }
 
     /**
+     * {@inheritDoc}
+     * <p/>
      * Gets command usage.
-     *
-     * @return the usage
      */
     @Override
     public String getUsage() {
@@ -51,9 +51,9 @@ public class ISubBase implements ISub {
     }
 
     /**
+     * {@inheritDoc}
+     * <p/>
      * Gets command label.
-     *
-     * @return the label
      */
     @Override
     public String getLabel() {
@@ -61,9 +61,9 @@ public class ISubBase implements ISub {
     }
 
     /**
+     * {@inheritDoc}
+     * <p/>
      * Gets cmd string.
-     *
-     * @return the cmd string
      */
     @Override
     public String getCmdString() {
@@ -71,15 +71,18 @@ public class ISubBase implements ISub {
     }
 
     /**
+     * {@inheritDoc}
+     * <p/>
      * Gets num args in valid.
-     *
-     * @return the num args in valid
      */
     @Override
     public String getNumArgsInValid() {
         return this.numArgsInValid;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return this.name;

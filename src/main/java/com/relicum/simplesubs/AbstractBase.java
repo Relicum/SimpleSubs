@@ -23,8 +23,8 @@ public abstract class AbstractBase extends ISubBase {
      * @param player the player
      * @param args   the args
      * @return the boolean
-     * @throws java.io.IOException    the iO exception
-     * @throws ClassNotFoundException the class not found exception
+     * @throws java.io.IOException              the iO exception
+     * @throws java.lang.ClassNotFoundException the class not found exception
      */
     public abstract boolean onCommand(Player player, String[] args) throws IOException, ClassNotFoundException;
 

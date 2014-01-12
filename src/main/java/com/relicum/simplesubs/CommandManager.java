@@ -18,31 +18,39 @@ import java.util.*;
 
 /**
  * SimpleSubs
- * First Created 30/12/13
+ * Used to handel all incoming commands.
+ * <p>
+ * Registers the command and it's permission correct with Bukkit.
+ * Integrates by default Bukkit help facility. Implements automatically TabCompletion at the root level
+ * </p>
+ * <p>All incoming commands will have their permission checked automatically before being passed to your command. I default permission
+ * message is displayed or you can override this using {@link com.relicum.simplesubs.SimpleMessages}
+ * </p>
  *
  * @author Relicum
  * @version 0.1
  */
 public class CommandManager implements TabExecutor {
 
-    public Map<String, AbstractBase> clist = new HashMap<>();
-    public List<String> tabs;
+    private Map<String, AbstractBase> clist = new HashMap<>();
+    private List<String> tabs;
 
-    public Plugin plugin;
-    public SimpleMessages MM;
-
-
-    public boolean setupCommands() {
-
-        return true;
-    }
+    private Plugin plugin;
+    private SimpleMessages MM;
 
 
-    public CommandManager(Plugin pl, registerCommand rg, SimpleMessages subMM) {
-        this.plugin = (JavaPlugin) pl;
-        tabs = new ArrayList<>(rg.getStore().size());
-        clist = rg.getStore();
-        MM = subMM;
+    /**
+     * Instantiates a new Command manager.
+     *
+     * @param plugin          the {@link org.bukkit.plugin.Plugin} plugin needs to be a instance of YOUR plugin
+     * @param registerCommand the register command
+     * @param simpleMessages  the simple messages
+     */
+    public CommandManager(Plugin plugin, registerCommand registerCommand, SimpleMessages simpleMessages) {
+        this.plugin = (JavaPlugin) plugin;
+        tabs = new ArrayList<>(registerCommand.getStore().size());
+        clist = registerCommand.getStore();
+        MM = simpleMessages;
         for (Map.Entry<String, AbstractBase> entry : clist.entrySet()) {
 
             tabs.add(entry.getKey());
@@ -53,13 +61,9 @@ public class CommandManager implements TabExecutor {
 
 
     /**
-     * Executes the given command, returning its success
+     * {@inheritDoc}
      *
-     * @param sender  Source of the command
-     * @param command Command which was executed
-     * @param label   Alias of the command which was used
-     * @param strings Passed command arguments
-     * @return true if a valid command, otherwise false
+     * Executes the given command, returning its success
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] strings) {
@@ -142,14 +146,7 @@ public class CommandManager implements TabExecutor {
         return true;
     }
 
-    /**
-     * This function will register all the clist With Bukkit as well as setting the Description, Useage Permission and
-     * label of the command
-     *
-     * @param name String
-     * @param sb   SubBase
-     */
-    public boolean registerCommand(String name, AbstractBase sb) {
+    private boolean registerCommand(String name, AbstractBase sb) {
 
 
         String[] ps = sb.getPermission().split("\\.");
@@ -195,13 +192,7 @@ public class CommandManager implements TabExecutor {
     }
 
 
-    /**
-     * Returns an instance of Command object setup For the command name you give it.
-     *
-     * @param name String
-     * @return PluginCommand
-     */
-    public PluginCommand getCommand(String name) {
+    private PluginCommand getCommand(String name) {
 
 
         PluginCommand command = null;
@@ -218,13 +209,7 @@ public class CommandManager implements TabExecutor {
     }
 
 
-    /**
-     * Returns an instance of CommandMap which Can then be used to correctly register the command and details with
-     * Bukkit
-     *
-     * @return CommandMap
-     */
-    public CommandMap getCommandMap() {
+    private CommandMap getCommandMap() {
         CommandMap commandMap = null;
         PluginManager pm = Bukkit.getServer().getPluginManager();
 
@@ -243,6 +228,17 @@ public class CommandManager implements TabExecutor {
     }
 
 
+    /**
+     * <p>onTabComplete.</p>
+     *
+     * @param sender a {@link org.bukkit.command.CommandSender} object.
+     * @param command a {@link org.bukkit.command.Command} object.
+     * @param sender a {@link org.bukkit.command.CommandSender} object.
+     * @param s a {@link java.lang.String} object.
+     * @param strings an array of {@link java.lang.String} objects.
+     * @param strings an array of {@link java.lang.String} objects.
+     * @return a {@link java.util.List} object.
+     */
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] strings) {
         if (sender instanceof Player) {
             Player player = (Player) sender;

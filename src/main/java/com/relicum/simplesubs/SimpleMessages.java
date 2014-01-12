@@ -15,10 +15,18 @@ public class SimpleMessages {
     private String unKnownCmd = ChatColor.RED + "Error: Unknown Command";
     private String internalError = ChatColor.RED + "Internal Error has occurred please let a member of staff know";
 
+    /**
+     * <p>Constructor for SimpleMessages.</p>
+     */
     public SimpleMessages() {
 
     }
 
+    /**
+     * <p>Getter for the field <code>playerOnly</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getPlayerOnly() {
         return this.playerOnly;
     }
@@ -32,6 +40,11 @@ public class SimpleMessages {
         this.playerOnly = mess;
     }
 
+    /**
+     * <p>Getter for the field <code>unKnownCmd</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getUnKnownCmd() {
         return unKnownCmd;
     }
@@ -45,6 +58,11 @@ public class SimpleMessages {
         this.unKnownCmd = unKnownCmd;
     }
 
+    /**
+     * <p>Getter for the field <code>internalError</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getInternalError() {
         return internalError;
     }

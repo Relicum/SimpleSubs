@@ -23,6 +23,11 @@ public class DebugManager implements TabExecutor {
     public Plugin plugin;
     public List<String> tab = new ArrayList<>(2);
 
+    /**
+     * <p>Constructor for DebugManager.</p>
+     *
+     * @param plugin a {@link org.bukkit.plugin.Plugin} object.
+     */
     public DebugManager(Plugin plugin) {
         this.plugin = plugin;
         tab.add("subcmd");
@@ -30,13 +35,9 @@ public class DebugManager implements TabExecutor {
     }
 
     /**
+     * {@inheritDoc}
+     * <p/>
      * Executes the given command, returning its success
-     *
-     * @param sender  Source of the command
-     * @param command Command which was executed
-     * @param label   Alias of the command which was used
-     * @param args    Passed command arguments
-     * @return true if a valid command, otherwise false
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -92,15 +93,9 @@ public class DebugManager implements TabExecutor {
     }
 
     /**
+     * {@inheritDoc}
+     * <p/>
      * Requests a list of possible completions for a command argument.
-     *
-     * @param sender  Source of the command
-     * @param command Command which was executed
-     * @param alias   The alias used
-     * @param args    The arguments passed to the command, including final
-     *                partial argument to be completed and command label
-     * @return A List of possible completions for the final argument, or null
-     * to default to the command executor
      */
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {

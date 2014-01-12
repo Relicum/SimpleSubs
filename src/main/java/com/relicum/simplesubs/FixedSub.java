@@ -11,6 +11,9 @@ public abstract class FixedSub extends AbstractBase implements IFixedArgs {
 
     public int numArgs;
 
+    /**
+     * <p>Constructor for FixedSub.</p>
+     */
     public FixedSub() {
         this.numArgs = setNumArgs();
         this.description = setDescription();
@@ -29,10 +32,9 @@ public abstract class FixedSub extends AbstractBase implements IFixedArgs {
      */
     public abstract int setNumArgs();
 
+
     /**
-     * Get num args.
-     *
-     * @return the num args
+     * {@inheritDoc}
      */
     @Override
     public int getNumArgs() {

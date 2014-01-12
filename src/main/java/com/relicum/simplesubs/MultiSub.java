@@ -13,6 +13,9 @@ public abstract class MultiSub extends AbstractBase implements IVariableArgs {
     public int maxArgs;
 
 
+    /**
+     * <p>Constructor for MultiSub.</p>
+     */
     public MultiSub() {
         this.minArgs = setMinArgs();
         this.maxArgs = setMaxArgs();
@@ -41,9 +44,9 @@ public abstract class MultiSub extends AbstractBase implements IVariableArgs {
     public abstract int setMinArgs();
 
     /**
+     * {@inheritDoc}
+     * <p/>
      * Gets min args.
-     *
-     * @return the min args
      */
     @Override
     public int getMinArgs() {
@@ -51,9 +54,9 @@ public abstract class MultiSub extends AbstractBase implements IVariableArgs {
     }
 
     /**
+     * {@inheritDoc}
+     * <p/>
      * Gets max args.
-     *
-     * @return the max args
      */
     @Override
     public int getMaxArgs() {
