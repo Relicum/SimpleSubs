@@ -15,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * </p>
  *
  * @author Relicum
- * @version 0.1
+ * @version 0.5
  */
 public class Simplesubs extends JavaPlugin {
 
