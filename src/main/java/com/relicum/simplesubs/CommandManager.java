@@ -17,15 +17,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
- * SimpleSubs
- * Used to handel all incoming commands.
- * <p>
- * Registers the command and it's permission correct with Bukkit.
- * Integrates by default Bukkit help facility. Implements automatically TabCompletion at the root level
- * </p>
- * <p>All incoming commands will have their permission checked automatically before being passed to your command. I default permission
- * message is displayed or you can override this using {@link com.relicum.simplesubs.SimpleMessages}
- * </p>
+ * SimpleSubs Used to handel all incoming commands. <p> Registers the command and it's permission correct with Bukkit.
+ * Integrates by default Bukkit help facility. Implements automatically TabCompletion at the root level </p> <p>All
+ * incoming commands will have their permission checked automatically before being passed to your command. I default
+ * permission message is displayed or you can override this using {@link com.relicum.simplesubs.SimpleMessages} </p>
  *
  * @author Relicum
  * @version 0.1
@@ -42,9 +37,12 @@ public class CommandManager implements TabExecutor {
     /**
      * Instantiates a new Command manager.
      *
-     * @param plugin          the {@link org.bukkit.plugin.Plugin} plugin needs to be a instance of YOUR plugin
-     * @param registerCommand the register command
-     * @param simpleMessages  the simple messages
+     * @param plugin
+     *         the {@link org.bukkit.plugin.Plugin} plugin needs to be a instance of YOUR plugin
+     * @param registerCommand
+     *         the register command
+     * @param simpleMessages
+     *         the simple messages
      */
     public CommandManager(Plugin plugin, registerCommand registerCommand, SimpleMessages simpleMessages) {
         this.plugin = (JavaPlugin) plugin;
@@ -62,7 +60,7 @@ public class CommandManager implements TabExecutor {
 
     /**
      * {@inheritDoc}
-     *
+     * <p/>
      * Executes the given command, returning its success
      */
     @Override
@@ -231,12 +229,12 @@ public class CommandManager implements TabExecutor {
     /**
      * <p>onTabComplete.</p>
      *
-     * @param sender a {@link org.bukkit.command.CommandSender} object.
-     * @param command a {@link org.bukkit.command.Command} object.
-     * @param sender a {@link org.bukkit.command.CommandSender} object.
-     * @param s a {@link java.lang.String} object.
-     * @param strings an array of {@link java.lang.String} objects.
-     * @param strings an array of {@link java.lang.String} objects.
+     * @param sender
+     *         a {@link org.bukkit.command.CommandSender} object.
+     * @param command
+     *         a {@link org.bukkit.command.Command} object.
+     * @param strings
+     *         an array of {@link java.lang.String} objects.
      * @return a {@link java.util.List} object.
      */
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] strings) {
