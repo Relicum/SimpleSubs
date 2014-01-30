@@ -1,6 +1,8 @@
 SimpleSubs - Making Sub Commands Easier
 ------------------
 
+[![Build Status](https://travis-ci.org/Relicum/SimpleSubs.png?branch=master)](https://travis-ci.org/Relicum/SimpleSubs)
+
 About
 -----
 The plugin is a developers tool for creating Sub commands for your plugin. This is done using SimpleSubs.
