@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * SimpleSubs
- * First Created 30/12/13
+ * registerCommand Used to register your commands with the {@link com.relicum.simplesubs.CommandManager}
  *
  * @author Relicum
  * @version 0.1
@@ -15,43 +14,37 @@ public class registerCommand {
     private Map<String, MultiSub> mstore = new HashMap<>();
 
     /**
-     * <p>add.</p>
+     * <p>Add a new Command with a Fixed number of arguments</p>
      *
-     * @param sub a {@link com.relicum.simplesubs.FixedSub} object.
+     * @param sub
+     *         The new {@link com.relicum.simplesubs.FixedSub} to add.
      */
     public void add(FixedSub sub) {
         this.store.put(sub.getName(), sub);
     }
 
     /**
-     * <p>add.</p>
+     * <p>Add a new Command with a variable number of arguments</p>
      *
-     * @param sub a {@link com.relicum.simplesubs.MultiSub} object.
+     * @param sub
+     *         The new {@link com.relicum.simplesubs.MultiSub} to add
      */
     public void add(MultiSub sub) {
         this.store.put(sub.getName(), sub);
     }
 
     /**
-     * <p>Getter for the field <code>store</code>.</p>
+     * <p>Used Internally</p>
      *
      * @return a {@link java.util.Map} object.
      */
-    public Map<String, AbstractBase> getStore() {
+    protected Map<String, AbstractBase> getStore() {
         return this.store;
     }
 
     /**
-     * <p>getMStore.</p>
-     *
-     * @return a {@link java.util.Map} object.
-     */
-    public Map<String, MultiSub> getMStore() {
-        return this.mstore;
-    }
-
-    /**
-     * <p>Constructor for registerCommand.</p>
+     * <p>Constructor for registerCommand. <p>Needs to be created in the plugins {@link
+     * org.bukkit.plugin.java.JavaPlugin} main class
      */
     public registerCommand() {
 
