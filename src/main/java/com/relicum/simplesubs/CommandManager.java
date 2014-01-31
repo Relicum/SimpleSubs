@@ -1,5 +1,10 @@
 package com.relicum.simplesubs;
 
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
@@ -10,18 +15,19 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.StringUtil;
 
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
-
 /**
- * SimpleSubs Used to handel all incoming commands. <p> Registers the command and it's permission correct with Bukkit.
- * Integrates by default Bukkit help facility. Implements automatically TabCompletion at the root level </p> <p>All
- * incoming commands will have their permission checked automatically before being passed to your command. I default
- * permission message is displayed or you can override this using {@link com.relicum.simplesubs.SimpleMessages} </p>
- *
+ * SimpleSubs Used to handel all incoming commands.
+ * <p>
+ * Registers the command and it's permission correct with Bukkit. Integrates by
+ * default Bukkit help facility. Implements automatically TabCompletion at the
+ * root level
+ * </p>
+ * <p>
+ * All incoming commands will have their permission checked automatically before
+ * being passed to your command. I default permission message is displayed or
+ * you can override this using {@link com.relicum.simplesubs.SimpleMessages}
+ * </p>
+ * 
  * @author Relicum
  * @version 0.1
  */
@@ -33,16 +39,13 @@ public class CommandManager implements TabExecutor {
     private Plugin plugin;
     private SimpleMessages MM;
 
-
     /**
      * Instantiates a new Command manager.
-     *
-     * @param plugin
-     *         the {@link org.bukkit.plugin.Plugin} plugin needs to be a instance of YOUR plugin
-     * @param registerCommand
-     *         the register command
-     * @param simpleMessages
-     *         the simple messages
+     * 
+     * @param plugin the {@link org.bukkit.plugin.Plugin} plugin needs to be a
+     *        instance of YOUR plugin
+     * @param registerCommand the register command
+     * @param simpleMessages the simple messages
      */
     public CommandManager(Plugin plugin, registerCommand registerCommand, SimpleMessages simpleMessages) {
         this.plugin = (JavaPlugin) plugin;
@@ -56,7 +59,6 @@ public class CommandManager implements TabExecutor {
         }
 
     }
-
 
     /**
      * {@inheritDoc}
@@ -75,7 +77,6 @@ public class CommandManager implements TabExecutor {
 
         Player player = (Player) sender;
 
-
         String sub = strings[0];
         ArrayList<String> t = new ArrayList<String>();
         t.addAll(Arrays.asList(strings));
@@ -87,7 +88,6 @@ public class CommandManager implements TabExecutor {
 
         if (clist.get(sub) instanceof FixedSub) {
             subCom = (FixedSub) clist.get(sub);
-
 
         } else {
 
@@ -106,7 +106,7 @@ public class CommandManager implements TabExecutor {
                 return true;
             }
 
-            //Check they have the perm
+            // Check they have the perm
             if (!player.isOp() && (!player.hasPermission(subCom.getPermission()))) {
                 player.sendMessage(subCom.getNumArgsInValid());
                 return true;
@@ -127,7 +127,7 @@ public class CommandManager implements TabExecutor {
                 return true;
             }
 
-            //Check they have the perm
+            // Check they have the perm
             if (!player.isOp() && (!player.hasPermission(subcom.getPermission()))) {
                 player.sendMessage(subcom.getNumArgsInValid());
                 return true;
@@ -146,12 +146,10 @@ public class CommandManager implements TabExecutor {
 
     private boolean registerCommand(String name, AbstractBase sb) {
 
-
         String[] ps = sb.getPermission().split("\\.");
         String ubPerm = ps[0] + "." + ps[1];
 
-
-        //String des = mm.getStringConfig(sb.getDescription());
+        // String des = mm.getStringConfig(sb.getDescription());
         String des = ChatColor.translateAlternateColorCodes('&', sb.getDescription());
 
         Permission per = new Permission(ubPerm + "." + name);
@@ -167,7 +165,7 @@ public class CommandManager implements TabExecutor {
         cd.setDescription(des);
         cd.setUsage(sb.getUsage());
         cd.setExecutor(this);
-
+        cd.setTabCompleter(sb);
         cd.setPermission(sb.getPermission());
 
         boolean display = false;
@@ -186,26 +184,22 @@ public class CommandManager implements TabExecutor {
 
         return false;
 
-
     }
-
 
     private PluginCommand getCommand(String name) {
 
-
         PluginCommand command = null;
         try {
-            Constructor c = PluginCommand.class.getDeclaredConstructor(new Class[]{String.class, Plugin.class});
+            Constructor c = PluginCommand.class.getDeclaredConstructor(new Class[] { String.class, Plugin.class });
             c.setAccessible(true);
 
-            command = (PluginCommand) c.newInstance(new Object[]{name, plugin});
+            command = (PluginCommand) c.newInstance(new Object[] { name, plugin });
         } catch (SecurityException | IllegalArgumentException | IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }
 
         return command;
     }
-
 
     private CommandMap getCommandMap() {
         CommandMap commandMap = null;
@@ -225,16 +219,14 @@ public class CommandManager implements TabExecutor {
         return commandMap;
     }
 
-
     /**
-     * <p>onTabComplete.</p>
-     *
-     * @param sender
-     *         a {@link org.bukkit.command.CommandSender} object.
-     * @param command
-     *         a {@link org.bukkit.command.Command} object.
-     * @param strings
-     *         an array of {@link java.lang.String} objects.
+     * <p>
+     * onTabComplete.
+     * </p>
+     * 
+     * @param sender a {@link org.bukkit.command.CommandSender} object.
+     * @param command a {@link org.bukkit.command.Command} object.
+     * @param strings an array of {@link java.lang.String} objects.
      * @return a {@link java.util.List} object.
      */
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] strings) {
@@ -242,13 +234,11 @@ public class CommandManager implements TabExecutor {
             Player player = (Player) sender;
             if (strings.length == 1) {
 
-
                 return StringUtil.copyPartialMatches(strings[0], tabs, new ArrayList<String>(tabs.size()));
 
             }
         }
         return Arrays.asList("");
     }
-
 
 }

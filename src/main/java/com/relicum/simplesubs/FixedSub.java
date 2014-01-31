@@ -1,18 +1,21 @@
 package com.relicum.simplesubs;
 
+import org.bukkit.command.TabCompleter;
+
 /**
- * SimpleSubs
- * First Created 31/12/13
- *
+ * SimpleSubs First Created 31/12/13
+ * 
  * @author Relicum
  * @version 0.1
  */
-public abstract class FixedSub extends AbstractBase implements IFixedArgs {
+public abstract class FixedSub extends AbstractBase implements IFixedArgs, TabCompleter {
 
     public int numArgs;
 
     /**
-     * <p>Constructor for FixedSub.</p>
+     * <p>
+     * Constructor for FixedSub.
+     * </p>
      */
     public FixedSub() {
         this.numArgs = setNumArgs();
@@ -27,11 +30,10 @@ public abstract class FixedSub extends AbstractBase implements IFixedArgs {
 
     /**
      * Set this to the number of arguments the command has
-     *
+     * 
      * @return the num args
      */
     public abstract int setNumArgs();
-
 
     /**
      * {@inheritDoc}
@@ -40,6 +42,5 @@ public abstract class FixedSub extends AbstractBase implements IFixedArgs {
     public int getNumArgs() {
         return this.numArgs;
     }
-
 
 }
