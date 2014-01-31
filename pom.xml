@@ -6,7 +6,7 @@
 
     <groupId>com.relicum</groupId>
     <artifactId>SimpleSubs</artifactId>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
     <packaging>jar</packaging>
     <name>SimpleSubs</name>
 

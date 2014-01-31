@@ -13,7 +13,6 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.StringUtil;
 
 /**
  * SimpleSubs Used to handel all incoming commands.
@@ -31,7 +30,7 @@ import org.bukkit.util.StringUtil;
  * @author Relicum
  * @version 0.1
  */
-public class CommandManager implements TabExecutor {
+public class CommandManager implements CommandExecutor {
 
     private Map<String, AbstractBase> clist = new HashMap<>();
     private List<String> tabs;
@@ -229,16 +228,15 @@ public class CommandManager implements TabExecutor {
      * @param strings an array of {@link java.lang.String} objects.
      * @return a {@link java.util.List} object.
      */
-    public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] strings) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            if (strings.length == 1) {
-
-                return StringUtil.copyPartialMatches(strings[0], tabs, new ArrayList<String>(tabs.size()));
-
-            }
-        }
-        return Arrays.asList("");
-    }
+    /*
+     * public List<String> onTabComplete(CommandSender sender, Command command,
+     * String s, String[] strings) { if (sender instanceof Player) { Player
+     * player = (Player) sender; if (strings.length == 1) {
+     * 
+     * return StringUtil.copyPartialMatches(strings[0], tabs, new
+     * ArrayList<String>(tabs.size()));
+     * 
+     * } } return Arrays.asList(""); }
+     */
 
 }

@@ -1,10 +1,6 @@
 package com.relicum.simplesubs;
 
 import java.io.IOException;
-import java.util.List;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionDefault;
 
@@ -14,7 +10,7 @@ import org.bukkit.permissions.PermissionDefault;
  * @author Relicum
  * @version 0.1
  */
-public abstract class AbstractBase extends ISubBase implements TabCompleter {
+public abstract class AbstractBase extends ISubBase {
 
     public PermissionDefault permissionDefault = PermissionDefault.OP;
 
@@ -80,19 +76,4 @@ public abstract class AbstractBase extends ISubBase implements TabCompleter {
         return this.permissionDefault;
     }
 
-    /**
-     * Requests a list of possible completions for a command argument.
-     * 
-     * @param sender Source of the command
-     * @param command Command which was executed
-     * @param alias The alias used
-     * @param args The arguments passed to the command, including final partial
-     *        argument to be completed and command label
-     * @return A List of possible completions for the final argument, or null to
-     *         default to the command executor
-     */
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return null;
-    }
 }
