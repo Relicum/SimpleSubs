@@ -9,7 +9,7 @@ import org.bukkit.ChatColor;
  * @author Relicum
  * @version 0.1
  */
-public abstract class ISubBase implements ISub {
+public class ISubBase implements ISub {
 
     public String name = this.getClass().getSimpleName();
     public String description;

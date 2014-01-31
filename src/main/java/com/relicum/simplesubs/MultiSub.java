@@ -1,14 +1,12 @@
 package com.relicum.simplesubs;
 
-import org.bukkit.command.TabCompleter;
-
 /**
  * SimpleSubs First Created 31/12/13
  * 
  * @author Relicum
  * @version 0.1
  */
-public abstract class MultiSub extends AbstractBase implements IVariableArgs, TabCompleter {
+public abstract class MultiSub extends AbstractBase implements IVariableArgs {
 
     public int minArgs;
     public int maxArgs;

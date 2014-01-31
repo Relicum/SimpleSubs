@@ -13,6 +13,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.StringUtil;
 
 /**
  * SimpleSubs Used to handel all incoming commands.
@@ -30,10 +31,12 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Relicum
  * @version 0.1
  */
-public class CommandManager implements CommandExecutor {
+public class CommandManager implements TabExecutor {
 
     private Map<String, AbstractBase> clist = new HashMap<>();
     private List<String> tabs;
+    private Map<String, List<String>> ta = new HashMap<>();
+    private Map<String, List<String>> ta2 = new HashMap<>();
 
     private Plugin plugin;
     private SimpleMessages MM;
@@ -54,7 +57,13 @@ public class CommandManager implements CommandExecutor {
         for (Map.Entry<String, AbstractBase> entry : clist.entrySet()) {
 
             tabs.add(entry.getKey());
-            registerCommand(entry.getKey(), entry.getValue());
+            if (entry.getValue().getTab() != null) {
+                ta.put(entry.getKey(), entry.getValue().getTab().get(0));
+                if (entry.getValue().getTab().size() > 1) {
+                    ta2.put(entry.getKey(), entry.getValue().getTab().get(1));
+                }
+            }
+           registerCommand(entry.getKey(), entry.getValue());
         }
 
     }
@@ -164,8 +173,8 @@ public class CommandManager implements CommandExecutor {
         cd.setDescription(des);
         cd.setUsage(sb.getUsage());
         cd.setExecutor(this);
-        cd.setTabCompleter(sb);
-        cd.setPermission(sb.getPermission());
+
+      cd.setPermission(sb.getPermission());
 
         boolean display = false;
         if (plugin.getConfig().contains("simplesubsDisplay")) {
@@ -228,15 +237,28 @@ public class CommandManager implements CommandExecutor {
      * @param strings an array of {@link java.lang.String} objects.
      * @return a {@link java.util.List} object.
      */
-    /*
-     * public List<String> onTabComplete(CommandSender sender, Command command,
-     * String s, String[] strings) { if (sender instanceof Player) { Player
-     * player = (Player) sender; if (strings.length == 1) {
-     * 
-     * return StringUtil.copyPartialMatches(strings[0], tabs, new
-     * ArrayList<String>(tabs.size()));
-     * 
-     * } } return Arrays.asList(""); }
-     */
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] strings) {
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            if (strings.length == 1) {
+
+                return StringUtil.copyPartialMatches(strings[0], tabs, new ArrayList<String>(tabs.size()));
+
+            }
+            if (strings.length == 2) {
+                if (ta.containsKey(strings[0]))
+                    return StringUtil.copyPartialMatches(strings[1], ta.get(strings[0]), new ArrayList<String>(ta.get(strings[0]).size()));
+
+            }
+            if (strings.length == 3) {
+                if (ta2.containsKey(strings[0]))
+                    return StringUtil.copyPartialMatches(strings[2], ta2.get(strings[0]), new ArrayList<String>(ta2.get(strings[0]).size()));
+
+            }
+
+        }
+        return Arrays.asList("");
+    }
 
 }

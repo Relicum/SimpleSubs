@@ -1,7 +1,5 @@
 package com.relicum.simplesubs;
 
-import org.bukkit.command.TabCompleter;
-
 /**
  * SimpleSubs
  * First Created 30/12/13
@@ -9,7 +7,7 @@ import org.bukkit.command.TabCompleter;
  * @author Relicum
  * @version 0.1
  */
-public interface ISub extends TabCompleter {
+public interface ISub {
 
     /**
      * Gets command description.

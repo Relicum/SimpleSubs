@@ -1,6 +1,7 @@
 package com.relicum.simplesubs;
 
 import java.io.IOException;
+import java.util.List;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionDefault;
 
@@ -13,8 +14,9 @@ import org.bukkit.permissions.PermissionDefault;
 public abstract class AbstractBase extends ISubBase {
 
     public PermissionDefault permissionDefault = PermissionDefault.OP;
+    public List<String> tb;
 
-    /**
+   /**
      * On command.
      * 
      * @param player the player
@@ -24,6 +26,13 @@ public abstract class AbstractBase extends ISubBase {
      * @throws java.lang.ClassNotFoundException the class not found exception
      */
     public abstract boolean onCommand(Player player, String[] args) throws IOException, ClassNotFoundException;
+
+    /**
+     * Get a String List to use for tab complete at first level of the command
+     * 
+     * @return the tab
+     */
+    public abstract List<List<String>> getTab();
 
     /**
      * Set this as the description of the command. Used in bukkit help
